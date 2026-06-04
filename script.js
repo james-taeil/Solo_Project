@@ -1,6 +1,25 @@
 const MIN = 1;
 const MAX = 45;
 const PICK = 6;
+const THEME_KEY = "lotto-theme";
+
+function getPreferredTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === "dark" || saved === "light") return saved;
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem(THEME_KEY, theme);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  applyTheme(current === "dark" ? "light" : "dark");
+}
+
+applyTheme(getPreferredTheme());
 
 function getBallColor(number) {
   if (number <= 10) return "yellow";
@@ -50,3 +69,4 @@ function handleGenerate() {
 }
 
 document.getElementById("generateBtn").addEventListener("click", handleGenerate);
+document.getElementById("themeToggle").addEventListener("click", toggleTheme);

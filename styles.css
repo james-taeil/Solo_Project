@@ -4,26 +4,105 @@
   padding: 0;
 }
 
+:root {
+  --bg-gradient: linear-gradient(160deg, #0f172a 0%, #1e293b 45%, #312e81 100%);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-label: #cbd5e1;
+  --container-bg: rgba(15, 23, 42, 0.85);
+  --container-border: rgba(148, 163, 184, 0.2);
+  --container-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  --input-bg: #1e293b;
+  --input-border: rgba(148, 163, 184, 0.35);
+  --row-bg: rgba(30, 41, 59, 0.75);
+  --row-border: rgba(148, 163, 184, 0.12);
+  --empty-border: rgba(148, 163, 184, 0.25);
+  --theme-toggle-bg: rgba(30, 41, 59, 0.9);
+  --theme-toggle-border: rgba(148, 163, 184, 0.25);
+  --theme-toggle-hover: rgba(51, 65, 85, 0.95);
+}
+
+[data-theme="light"] {
+  --bg-gradient: linear-gradient(160deg, #f8fafc 0%, #e2e8f0 45%, #dbeafe 100%);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-label: #334155;
+  --container-bg: rgba(255, 255, 255, 0.92);
+  --container-border: rgba(148, 163, 184, 0.35);
+  --container-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  --input-bg: #ffffff;
+  --input-border: rgba(148, 163, 184, 0.45);
+  --row-bg: rgba(241, 245, 249, 0.95);
+  --row-border: rgba(148, 163, 184, 0.25);
+  --empty-border: rgba(148, 163, 184, 0.35);
+  --theme-toggle-bg: rgba(241, 245, 249, 0.95);
+  --theme-toggle-border: rgba(148, 163, 184, 0.35);
+  --theme-toggle-hover: rgba(226, 232, 240, 0.98);
+}
+
 body {
   min-height: 100vh;
   font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  background: linear-gradient(160deg, #0f172a 0%, #1e293b 45%, #312e81 100%);
-  color: #f8fafc;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .container {
+  position: relative;
   width: 100%;
   max-width: 520px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--container-bg);
+  border: 1px solid var(--container-border);
   border-radius: 24px;
   padding: 32px 28px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--container-shadow);
   backdrop-filter: blur(12px);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--theme-toggle-border);
+  border-radius: 50%;
+  background: var(--theme-toggle-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--theme-toggle-hover);
+  transform: scale(1.05);
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.theme-icon-light {
+  display: none;
+}
+
+[data-theme="light"] .theme-icon-dark {
+  display: none;
+}
+
+[data-theme="light"] .theme-icon-light {
+  display: inline;
 }
 
 h1 {
@@ -35,7 +114,7 @@ h1 {
 
 .subtitle {
   text-align: center;
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   margin-bottom: 28px;
 }
@@ -52,18 +131,19 @@ label {
   gap: 6px;
   flex: 1;
   font-size: 0.85rem;
-  color: #cbd5e1;
+  color: var(--text-label);
 }
 
 select {
   appearance: none;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  background: #1e293b;
-  color: #f8fafc;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-primary);
   border-radius: 12px;
   padding: 12px 14px;
   font-size: 1rem;
   cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .generate-btn {
@@ -101,15 +181,16 @@ select {
   justify-content: space-between;
   gap: 12px;
   padding: 14px 16px;
-  background: rgba(30, 41, 59, 0.75);
+  background: var(--row-bg);
   border-radius: 16px;
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  border: 1px solid var(--row-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .row-label {
   min-width: 28px;
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 600;
 }
 
@@ -165,9 +246,9 @@ select {
 
 .empty {
   text-align: center;
-  color: #64748b;
+  color: var(--text-muted);
   padding: 32px 12px;
-  border: 1px dashed rgba(148, 163, 184, 0.25);
+  border: 1px dashed var(--empty-border);
   border-radius: 16px;
   line-height: 1.6;
 }
@@ -176,5 +257,5 @@ select {
   margin-top: 20px;
   text-align: center;
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
