@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로또 번호 생성기</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>로또 번호 생성기</h1>
+    <p class="subtitle">1~45 중 겹치지 않는 6개 번호를 랜덤으로 생성합니다</p>
+
+    <div class="controls">
+      <label>
+        생성 개수
+        <select id="count">
+          <option value="1">1세트</option>
+          <option value="3">3세트</option>
+          <option value="5" selected>5세트</option>
+          <option value="10">10세트</option>
+        </select>
+      </label>
+    </div>
+
+    <button class="generate-btn" id="generateBtn" type="button">번호 생성하기</button>
+
+    <section class="results" id="results">
+      <div class="empty">버튼을 눌러 로또 번호를 생성해 보세요.</div>
+    </section>
+
+    <p class="footer">※ 참고용 랜덤 번호이며, 당첨을 보장하지 않습니다.</p>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
