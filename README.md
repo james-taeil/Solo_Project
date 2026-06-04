@@ -1,6 +1,6 @@
-# project
+# Solo_Project
 
-SoloProject 코딩 작업 폴더입니다.
+SoloProject 코딩 작업 저장소입니다.
 
 - `index.html` — 로또 번호 생성기
 - `styles.css` — 스타일시트
