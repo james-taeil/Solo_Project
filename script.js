@@ -68,5 +68,16 @@ function handleGenerate() {
   renderResults(sets);
 }
 
+function initAds() {
+  document.querySelectorAll(".adsbygoogle").forEach(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (error) {
+      console.error("AdSense init failed:", error);
+    }
+  });
+}
+
 document.getElementById("generateBtn").addEventListener("click", handleGenerate);
 document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+initAds();
